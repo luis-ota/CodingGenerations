@@ -1,0 +1,77 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+body{
+    background-color: #413e3e;
+    color: antiquewhite;
+}
+
+span {
+    visibility: hidden;
+    display: none;
+}
+
+main{
+    font-size: 20px;
+    justify-content: center;
+}
+
+
+div#FormularioConteiner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+
+
+div#formulario{
+    display: flex;
+    flex-direction: column;
+}
+
+div#formulario div{
+    display: flex;
+    flex-direction: column;
+	padding: 3px;
+
+}
+
+div#formulario{
+    padding: 8px;
+
+}
+
+.cabeca div {
+    overflow: hidden;
+    padding: 25px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.formImput{
+}
+
+.logo{
+    height: 100px;
+    width: 100px;
+}
+
+footer {
+    bottom: 0;
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    background-color: rgb(183, 0, 255);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+  
