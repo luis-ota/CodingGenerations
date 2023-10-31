@@ -27,7 +27,7 @@
                 Cadastro de Aluno 
             </div>
             <div id="formulario">
-                <form action="" id="form">
+                <form action="index.php" method="post" id="form">
                     <div id="Nome">
                         <div class="formImput">
                             <label for="nome"> Nome </label>
@@ -37,18 +37,10 @@
                         </div>
                     </div>
 
-                    <div id="email">
-                        <div class="formImput">
-                            <label for="email"> Email </label>
-                            <input type="text" name="email" id="email" value="">
-                            <span>ERRO</span>
-                        </div>
-                    </div>
-
                     <div id="cpf">
                         <div class="formImput">
                             <label for="cpf"> CPF </label>
-                            <input type="text" name="cpf" id="cpf" value="">
+                            <input type="text" name="CPF" id="cpf" value="">
                             <span>ERRO</span>
                         </div>
                     </div>
@@ -78,22 +70,12 @@
                         </div>
                     </div>
 
-                    <div id="senha">
-                        <div class="formImput">
-                            <label for="senha"> Senha </label>
-                            <input type="password" name="senha" id="senha" value="">
-                            <span>ERRO</span>
+                    <div id="submmitContainer">
+                            <button type="submit" id="btn" name="cadastro_aluno"> Cadastrar </button>
                         </div>
-                    </div>
 
-                    <div id="confirmSenha">
-                        <div class="formImput">
-                            <label for="confirmSenha"> Confirmar Senha </label>
-                            <input type="password" name="confirmSenha" id="confirmSenha" value="">
-                            <span>ERRO</span>
-                        </div>
-                    </div>
                 </form>
+
                 
             </div>
         </div>
@@ -108,3 +90,42 @@
     </footer>
 </body>
 </html>
+
+<?php
+
+if(isset($_POST['cadastro_aluno'])) {
+    $nome = mysqli_real_escape_string($connection, $_POST['nome']);
+    $Data_nasc = mysqli_real_escape_string($connection, $_POST['data']);
+    $CPF = mysqli_real_escape_string($connection, $_POST['cpf']);
+    
+    $Matricula = "select Matricula from projetocg.tbaluno order by Matricula desc limit 1";
+    $getMatricula = mysqli_query($connection, $IDResponsavel);
+
+    $Matricula = mysqli_fetch_assoc($getMatricula);
+
+
+
+    $nomeResp = mysqli_real_escape_string($connection, $_POST['nome']);
+    $docResp = mysqli_real_escape_string($connection, $_POST['nome']);
+
+
+    $sqlCreateResponsavel = "INSERT INTO TBResponsavel (IDResponsavel, Nome, CPF)
+                              VALUES ('$Matricula['Matricula'] + 1', '$nomeResp', '$docResp')";
+
+    $sqlCreateAluno = "INSERT INTO TBAluno (Matricula, Nome, data_nasc, CPF, IDResponsavel, IDTurma) 
+                        VALUES ('$Matricula['Matricula'] + 1', '$Nome', '$Data_nasc', '$CPF', '$Matricula['Matricula'] + 1', '1');";
+
+
+
+
+    $createAluno = mysqli_query($connection, $sqlCreateAluno);
+    $createResponsavel = mysqli_query($connection, $sqlCreateResponsavel);
+
+    if (!$createAluno and !$createResponsavel ) {
+        echo '<b>Error</b>';
+    }
+}
+mysqli_close($connection);
+
+
+?>
