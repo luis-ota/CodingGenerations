@@ -1,2 +1,0 @@
-# CodingGenerations
-Escola de Programação
