@@ -5,106 +5,165 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
     <link rel="icon" type="image/png" href="assets/Logo.png" sizes="16x16">
     <link rel="stylesheet" href="cadaluno.css">
+    <script type="module" src="./script.js" defer></script>
 </head>
 <body>
-    <header class="cabeca">
-        <div>
-            <h1> Coding Generations </h1>
-            <img class="logo" src="assets/Logo.png" alt="Logo">
+<header>
+    <div class="logoenome">
+        <img class="logo" src="assets/Logo.png" alt="Logo">
+        <h1> Coding Generations </h1>
+    </div>
+    <div>
+        <h1>Cadastro de Aluno</h1>
+    </div>
+</header>
+
+<main>
+
+    <div class="select">
+        <h3>
+            Selecione uma Turma
+        </h3>
+        <select name="selectCurso" method="post" id="selectCurso">
+            <option value="1">Turma de Desenvolvimento Front-end 2023</option>
+            <option value="2">Turma de Desenvolvimento Back-end 2023</option>
+            <option value="3">Turma Full Stack 2023</option>
+            <option value="4">Turma de Banco de Dados 2023</option>
+            <option value="5">Turma de Mobile App Development 2023</option>
+            <option value="6">Turma de Inteligência Artificial 2023</option>
+            <option value="7">Turma de Segurança da Informação 2023</option>
+            <option value="8">Turma de Desenvolvimento Ágil 2023</option>
+        </select>
+    </div>
+
+    <div id="FormularioConteiner">
+
+        <div id="formulario">
+            <form id="form" action="index.php" method="post" name="cadastro_aluno">
+                <div>
+                    <div class="formInput">
+                        <label for="nome"> Nome </label>
+                        <input type="text" name="nome" id="nome" value="">
+                        <span id="nomeErro" class="erro">ERRO</span>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label for="cpf"> CPF </label>
+                        <input type="text" name="cpf" id="cpf" value="">
+                        <span>ERRO</span>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="formInput">
+                        <label for="data"> Data de Nascimento </label>
+                        <input type="date" name="data" id="data" value="">
+                        <span>ERRO</span>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="formInput">
+                        <label for="nomeResp"> Nome Responsavel </label>
+                        <input type="text" name="nomeResp" id="nomeResp" value="">
+                        <span>ERRO</span>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="formInput">
+                        <label for="cpfResp"> CPF Responsavel </label>
+                        <input type="text" name="cpfResp" id="cpfResp" value="">
+                        <span>ERRO</span>
+                    </div>
+                </div>
+
+                <div style="display: none; visibility: hidden">
+                    <div class="formInput">
+                        <label for="cpfResp"> CPF Responsavel </label>
+                        <input type="text" name="cpfResp" id="cpfResp" value="">
+                        <span>ERRO</span>
+                    </div>
+                </div>
+
+                <div id="submmitContainer" class="btn">
+                    <button type="submit" id="btn" name="cadastro_aluno">
+                        Cadastrar
+                        <svg width="180px" height="60px" viewBox="0 0 180 60" class="border">
+                            <polyline points="179,1 179,59 1,59 1,1 179,1" class="bg-line"></polyline>
+                            <polyline points="179,1 179,59 1,59 1,1 179,1" class="hl-line"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </form>
         </div>
-    </header>
-    
-    <main>
-        <div id="FormularioConteiner">
-            <div id="titulo">
-                Cadastro de Aluno 
-            </div>
-            <div id="formulario">
-                <form action="" id="form">
-                    <div id="Nome">
-                        <div class="formImput">
-                            <label for="nome"> Nome </label>
-                            <input type="text" name="nome" id="nome" value="">
-                            
-                            <span>ERRO</span>
-                        </div>
-                    </div>
-
-                    <div id="email">
-                        <div class="formImput">
-                            <label for="email"> Email </label>
-                            <input type="text" name="email" id="email" value="">
-                            <span>ERRO</span>
-                        </div>
-                    </div>
-
-                    <div id="cpf">
-                        <div class="formImput">
-                            <label for="cpf"> CPF </label>
-                            <input type="text" name="cpf" id="cpf" value="">
-                            <span>ERRO</span>
-                        </div>
-                    </div>
-                    
-
-                    <div id="dataNasc">
-                        <div class="formImput">
-                            <label for="dataNasc"> Data de Nascimento </label>
-                            <input type="date" name="data" id="data" value="">
-                            <span>ERRO</span>
-                        </div>
-                    </div>
-
-                    <div id="nomeResp">
-                        <div class="formImput">
-                            <label for="nomeResp"> Nome Responsavel </label>
-                            <input type="text" name="nomeResp" id="nomeResp" value="">
-                            <span>ERRO</span>
-                        </div>
-                    </div>
-
-                    <div id="docResp">
-                        <div class="formImput">
-                            <label for="docResp"> Documento Responsavel </label>
-                            <input type="text" name="docResp" id="docResp" value="">
-                            <span>ERRO</span>
-                        </div>
-                    </div>
-
-                    <div id="senha">
-                        <div class="formImput">
-                            <label for="senha"> Senha </label>
-                            <input type="password" name="senha" id="senha" value="">
-                            <span>ERRO</span>
-                        </div>
-                    </div>
-
-                    <div id="confirmSenha">
-                        <div class="formImput">
-                            <label for="confirmSenha"> Confirmar Senha </label>
-                            <input type="password" name="confirmSenha" id="confirmSenha" value="">
-                            <span>ERRO</span>
-                        </div>
-                    </div>
-                </form>
-                
-            </div>
-        </div>
-
-    </main>
-
-
-    <footer>
-        <div>
-         © 2023 Coding Genereations
-        </div>
-    </footer>
+    </div>
+</main>
+<script>
+    function teste(){
+        console.log('clicou')
+    }
+</script>
+<footer>
+    <div>
+        © 2023 Coding Generations
+    </div>
+</footer>
 </body>
 </html>
+
+<?php
+
+if(isset($_POST['cadastro_aluno'])) {
+    $nome = mysqli_real_escape_string($connection, $_POST['nome']);
+    $Data_nasc = mysqli_real_escape_string($connection, $_POST['data']);
+    $CPF = mysqli_real_escape_string($connection, $_POST['cpf']);
+    $nomeResp = mysqli_real_escape_string($connection, $_POST['nomeResp']);
+    $cpfResp = mysqli_real_escape_string($connection, $_POST['cpfResp']);
+    $CPF = preg_replace('/[^0-9]/', '', $CPF);
+    $cpfResp = preg_replace('/[^0-9]/', '', $cpfResp);
+
+
+    //$MatriculaSQL = "select MAX(Matricula) from projetoCG.TBAluno;";
+    //$getMatricula = mysqli_query($connection, $Matricula);
+
+
+    //$IDRespSQL = "select IDResponsavel from TBResponsavel
+    //             where cpf = '$cpfResp';"
+
+    //$idRespResult = mysqli_query($connection, $IDRespSQL);
+    //$IDRespResultCheck = mysqli_num_rows($idRespResult);
+    
+
+
+    $sqlInsertResponsavel = "INSERT INTO TBResponsavel (IDResponsavel, Nome, CPF) 
+                             VALUES (31, '$nomeResp', '$cpfResp');";
+
+    $sqlInsertAluno = "INSERT INTO TBAluno (Matricula, Nome, data_nasc, CPF, IDResponsavel, IDTurma) 
+                       VALUES (31, '$nome', '$Data_nasc' ,'$CPF', 31, 6);";
+
+
+    $createResponsavel = mysqli_query($connection, $sqlInsertResponsavel);
+    $createAluno = mysqli_query($connection, $sqlInsertAluno);
+
+
+    if (!$createAluno and !$createResponsavel ) {
+        echo '<b>Error</b>';
+}else{
+header("location: ..\index2.html");
+
+}
+}
+mysqli_close($connection);
+
+
+?>

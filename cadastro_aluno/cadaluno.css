@@ -1,22 +1,66 @@
-*{
+
+* {
     padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box; /* Add box-sizing for better layout handling */
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
     margin: 0;
-    font-family: sans-serif;
+    padding: 0;
 }
 
-body{
-    background-color: #413e3e;
-    color: antiquewhite;
-}
-
-span {
-    visibility: hidden;
-    display: none;
-}
-
-main{
+main {
     font-size: 20px;
-    justify-content: center;
+    padding: 80px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+header {
+    background-color: #6717c2;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 150px;
+}
+
+.logoenome {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.logo {
+    height: 150px;
+    width: 150px;
+}
+
+
+.select select {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #a85cf0;
+    border-radius: 5px;
+    background-color: #1d0141;
+    color: #ffffff;
+    width: 100%;
+}
+
+/* Style for select options */
+.select select option {
+    background-color: #1d0141;
+    color: #ffffff;
+}
+
+.select {
+    width: 35%;
+    padding: 0 110px;
+    margin-bottom: 20px;
 }
 
 
@@ -24,42 +68,103 @@ div#FormularioConteiner {
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    width: 30%;
 }
 
-
-
-div#formulario{
+div#formulario {
     display: flex;
     flex-direction: column;
-}
-
-div#formulario div{
-    display: flex;
-    flex-direction: column;
-	padding: 3px;
-
-}
-
-div#formulario{
     padding: 8px;
+    width: 100%;
 
 }
 
-.cabeca div {
-    overflow: hidden;
-    padding: 25px 25px;
+div#formulario div {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    padding: 5px;
+}
+
+div#formulario label {
+    margin-bottom: 5px;
+}
+
+div#formulario input[type="text"],
+div#formulario input[type="date"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #a85cf0;
+    border-radius: 5px;
+    background-color: #1d0141;
+    color: #ffffff;
+}
+
+.btn {
+    position: relative;
+    width: 140px;
+    height: 35px;
+    cursor: pointer;
+    background: #a85cf0;
+    border: 1px solid #a85cf0;
+    outline: none;
+    transition: 1s ease-in-out;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 10px;
+
 }
 
-.formImput{
+#submmitContainer>button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    height: 35px;
+    width: 140px;
 }
 
-.logo{
-    height: 100px;
-    width: 100px;
+svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    fill: none;
+    stroke: #fff;
+    stroke-dasharray: 150 480;
+    stroke-dashoffset: 150;
+    transition: 1s ease-in-out;
+    width: 140px;
+    height: 47px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #a85cf0;
+}
+
+.btn:hover svg {
+    stroke-dashoffset: -480;
+}
+
+.btn span {
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+}
+
+span {
+    color: #ff0000;
+    text-align: center;
+    display: none;
+    visibility: hidden;
+    font-size: 20px;
+}
+
+div.error > span {
+    visibility: visible;
+    display: block;
 }
 
 footer {
@@ -67,11 +172,9 @@ footer {
     position: fixed;
     height: 50px;
     width: 100%;
-    background-color: rgb(183, 0, 255);
-    color: white;
+    background-color: #6717c2;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-  
