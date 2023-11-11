@@ -6,9 +6,10 @@ let isOpen = false;
 menuIcon.addEventListener('click', () => {
     isOpen = !isOpen;
         if (isOpen) {
+            menu.style.visibility = 'visible';
             menu.style.display = 'block';
         } else {
-            menu.style.display = 'none';
+            menu.style.visibility = 'hidden';
         }
     });
 
@@ -19,7 +20,7 @@ document.getElementById("CadButton").addEventListener("click", function() {
 
 document.getElementById("loginButton").addEventListener("click", function() {
        
-        window.location.href = "index2.html";
+        window.location.href = "login/index.php";
         });
 
 const carouselItems = document.querySelector('.carousel-inner');

@@ -3,34 +3,40 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
     background-color: #000000;
+    background-image: url("Imagens/796839.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
 }
 
 .home {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    text-align: center; 
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
     background-color: #6717c2;
+    padding: 0px 90px;
 }
 
 h1 {
-    margin: 0;
-    color: #000000;
-    padding: 20px;
+  margin: 0;
+  color: #ffffff;
+  padding: 20px;
 }
 
 img {
-    max-width: 200px;
-    margin-left: 20px;
-    float: left;
-    margin-right: 20px; 
+  max-width: 200px;
+  margin-right: 20px;
 }
 
 
+
 .menu {
-    display: none;
+    display: block;
+    visibility: hidden;
     position: relative;
-    top: 50px;
+    top: 0;
     right: 0;
     width: 200px;
 }
@@ -107,7 +113,12 @@ img {
     align-items: center;
     color: white;
   }
-  
+
+.menu-logo-nome {
+    display: flex;
+    align-items: center;
+}
+
   svg {
     position: absolute;
     fill: none;
@@ -145,19 +156,19 @@ h2{
     justify-content: center;
     align-items: center;
 }
-
-.principal{
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    color: #000; 
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 70%;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba
+.principal {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  color: #000; 
+  background-color: white;
+  border: 1px solid #6717c2;
+  border-radius: 5px;
+  width: 70%;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba;
 }
+
 
 span {
     color: #000000;
@@ -177,6 +188,7 @@ span {
 .carousel-inner {
   display: flex;
   transition: transform 0.5s ease;
+  gap: 5px;
 }
 
 .carousel-item {
@@ -201,21 +213,18 @@ span {
   right: 0;
 }
 
-  
-
-.social-icons {
-    text-align: center; 
+.fotos {
+  display: flex;
 }
 
-.social-icons a {
-    display: inline-block; 
-    margin-right: 10px;
+.fotos img {
+  width: 100%; /* Garante que todas as imagens tenham a mesma largura */
+  height: auto; /* Mantém a proporção da imagem */
 }
-
-.social-icons img {
-    width: 32px; 
-    height: 32px;
-}  
+.banco-de-dados{
+  display: flex;
+  justify-content: center;
+}
 h3{
     color: #ffffff;
     text-align: center;
@@ -229,10 +238,14 @@ ul{
     color: #ffffff;
 
 }
+.rodape{
+  text-align: center;
+  color:#fff;
+}
 footer {
-    text-align: center;
-    background-color: #6717c2;
-    color: #000000;
-    padding: 10px;
-    margin-top: 20px;
+text-align: center;
+background-color: #6717c2;
+color: #000000;
+padding: 10px;
+margin-top: 20px;
 }

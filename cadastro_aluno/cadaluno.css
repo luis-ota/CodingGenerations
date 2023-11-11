@@ -34,12 +34,13 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
+    text-decoration: none;
+    color: inherit;
 }
 .logo {
     height: 150px;
     width: 150px;
 }
-
 
 .select select {
     padding: 8px;
@@ -102,7 +103,7 @@ div#formulario input[type="date"] {
 .btn {
     position: relative;
     width: 140px;
-    height: 35px;
+    height: 44px;
     cursor: pointer;
     background: #a85cf0;
     border: 1px solid #a85cf0;
@@ -122,8 +123,6 @@ div#formulario input[type="date"] {
     background-color: transparent;
     border: none;
     color: white;
-    height: 35px;
-    width: 140px;
 }
 
 svg {
@@ -138,6 +137,11 @@ svg {
     width: 140px;
     height: 47px;
     cursor: pointer;
+    border-radius: 5px;
+}
+
+.bg-line{
+    display: flex;
 }
 
 .btn:hover {

@@ -1,9 +1,6 @@
 <?php
-include('banco/connection.php');
-?>
+include('../banco/connection.php');
 
-
-<?php
 
 if(isset($_POST['cadastro_aluno'])) {
     $nome = mysqli_real_escape_string($connection, $_POST['nome']);
@@ -16,6 +13,7 @@ if(isset($_POST['cadastro_aluno'])) {
 
     $CPF = preg_replace('/[^0-9]/', '', $CPF);
     $cpfResp = preg_replace('/[^0-9]/', '', $cpfResp);
+
 
 
 
@@ -58,8 +56,9 @@ if(isset($_POST['cadastro_aluno'])) {
         }
 
         // Continuar com o restante do seu código para inserir o aluno
-        $sqlInsertAluno = "INSERT INTO TBAluno (Matricula, Nome, data_nasc, CPF, IDResponsavel, IDTurma)
-                           VALUES ($Matricula, '$nome', '$Data_nasc', '$CPF', $IDResp, $curso);";
+        $usuario = strstr(strtolower($nome . ' '), ' ', true) . $Matricula;
+        $sqlInsertAluno = "INSERT INTO TBAluno (Matricula, Nome, data_nasc, CPF, IDResponsavel, IDTurma, usuario)
+                           VALUES ($Matricula, '$nome', '$Data_nasc', '$CPF', $IDResp, $curso, '$usuario');";
 
         $createAluno = mysqli_query($connection, $sqlInsertAluno);
 
@@ -67,7 +66,7 @@ if(isset($_POST['cadastro_aluno'])) {
             echo '<p style="font-size: 18px; color: red;"><b>Error:</b> Não foi possível cadastrar o aluno.</p>';
 
         } else {
-            header("location: ..\index2.html");
+            header("location: ..\login\index.php");
         }
     }
 }
@@ -88,10 +87,11 @@ mysqli_close($connection);
     </head>
     <body>
     <header>
-        <div class="logoenome">
+            <a href="../index.html" class="logoenome">
             <img class="logo" src="assets/Logo.png" alt="Logo">
             <h1> Coding Generations </h1>
-        </div>
+            </a>
+
         <div>
             <h1>Cadastro de Aluno</h1>
         </div>
@@ -170,7 +170,7 @@ mysqli_close($connection);
                     <div id="submmitContainer" class="btn">
                         <button type="submit" id="btn" name="cadastro_aluno">
                             Cadastrar
-                            <svg width="180px" height="60px" viewBox="0 0 180 60" class="border">
+                            <svg viewBox="0 23 183 15" class="border">
                                 <polyline points="179,1 179,59 1,59 1,1 179,1" class="bg-line"></polyline>
                                 <polyline points="179,1 179,59 1,59 1,1 179,1" class="hl-line"></polyline>
                             </svg>

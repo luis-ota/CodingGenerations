@@ -1,0 +1,114 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #000000;
+}
+
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #6717c2;
+}
+
+h1 {
+  margin: 0;
+  color: #ffffff;
+  padding: 20px;
+}
+
+.logo {
+  max-width: 90px; 
+  margin-left: 20px;
+  float: left;
+  margin-right: 20px;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%; /* Ocupará a altura total da página */
+  width: 150px; /* Largura da barra lateral, ajuste conforme necessário */
+  background-color: #6717c2; /* Cor de fundo da barra lateral */
+  padding-top: 20px; /* Espaçamento superior interno */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: white;
+}
+
+.sidebar a:hover {
+    color: #af80e5;
+}
+H2{
+  text-align: center;
+  color: #ffffff;
+}
+.content {
+    margin-left: 200px;
+    padding: 16px;
+}
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .card {
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  img {
+    max-width: 100%; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto; 
+  }
+  .card p {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  span {
+    color: #000000;
+    text-align: center;
+    display: block; 
+}  
+
+.rodape{
+    text-align: center;
+    color:#fff;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #6717c2; 
+  color: #fff; 
+  text-align: center;
+  padding: 10px;
+}
