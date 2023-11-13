@@ -1,0 +1,167 @@
+
+
+.logo {
+    max-width: 150px;
+    margin-left: 20px;
+    float: left;
+    margin-right: 20px;
+}
+
+#peril {
+    max-width: 400px;
+    margin: 7% auto;
+    padding: 20px;
+    background-color:#6717c2;
+    border: 1px solid;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 254, 254, 0.1);
+    color: #ffffff;
+
+
+}
+
+input{
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #a85cf0;
+    border-radius: 5px;
+    background-color: #1d0141;
+    color: #ffffff;
+    width: 95%
+}
+
+label, input {
+    display: block;
+    margin-bottom: 10px;
+    color: white;
+}
+
+button {
+    background-color: #350735;
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+h3{
+    text-align: center;
+    color:#fff
+}
+.rodape{
+    text-align: center;
+    color:#fff;
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #6717c2;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+}
+
+.home > a{
+    text-decoration: none;
+    width: 30%;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    margin: 0;
+    color: #ffffff;
+    padding: 20px;
+}
+
+h2 {
+    color: white;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    max-width: 90px;
+    margin-left: 20px;
+    float: left;
+    margin-right: 20px;
+}
+p{
+    text-align: center;
+}
+.sidebar {
+    left: 0;
+    height: 300%;
+    width: 150px;
+    background-color: #6717c2;
+    padding-top: 0;
+    display: flex;
+    visibility: hidden;
+}
+
+.sidebar.show-sidebar {
+    display: block;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    padding: 10px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: white;
+}
+
+.sidebar a:hover {
+    color: #af80e5;
+}
+
+span {
+    color: #ff0000;
+    text-align: center;
+    display: none;
+    visibility: hidden;
+    font-size: 20px;
+}
+
+div.error > span {
+    visibility: visible;
+    display: block;
+}
+
+.editarr {
+    display: flex;
+    width: 20%;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40%;
+}
+
+#login{
+    display: flex;
+}
+
+#formulario{
+    width: 100%;
+}
+
+

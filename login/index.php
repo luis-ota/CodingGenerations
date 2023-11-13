@@ -10,23 +10,28 @@ if(isset($_POST['login'])) {
     $getUsuario = mysqli_query($connection, $usuarioSQL);
 
     if (!$getUsuario) {
-        // Verifica se houve erro na consulta
-        die("Erro na consulta: " . mysqli_error($connection));
+        echo '<p style="font-size: 18px; color: red;"> <b>Aviso: </b>usuario ou senha incorretos</p>';
     }else{
-        echo '<p style="font-size: 18px; color: red;"> usuario ou senha incorretos</p>';
-    }
-
-    if (mysqli_num_rows($getUsuario) > 0) {
-        $linha = mysqli_fetch_assoc($getUsuario);
-        $cpfAluno = $linha['CPF'];
-
-        if ($senha == $cpfAluno) {
-            header("location: ../logado/index.html");
-        }else{
-            echo '<p style="font-size: 18px; color: red;"> <b>Aviso: </b>usuario ou senha incorretos</p>';
+        if (mysqli_num_rows($getUsuario) > 0) {
+            $linha = mysqli_fetch_assoc($getUsuario);
+            $cpfAluno = $linha['CPF'];
+            $usuarioAluno = $linha['usuario'];
+            if ($senha == $cpfAluno and $usuario!=null) {
+                header("location: ../logado/index.html");
+            }else{
+                $senhaIncorreta = true;
+                $usuarioInexistente = false;
+            }
+        }else {
+            $usuarioInexistente = true;
+            $senhaIncorreta = false;
         }
     }
 
+
+}else{
+    $senhaIncorreta = false;
+    $usuarioInexistente = false;
 }
 
 mysqli_close($connection);
@@ -52,14 +57,18 @@ mysqli_close($connection);
 </header><br><br><br><br>
 
 <div id="formulario">
-    <form id="login" name="login" action="#" method="post" >
+    <form id="login" name="login" action="index.php" method="post" >
         <h3>Faça seu login:</h3>
         <label for="usuario">Usuário:</label>
         <input type="text" id="usuario" name="usuario" required>
-
+        <?php if ($usuarioInexistente) {
+            echo '<p style="font-size: 18px; color: red;"> <b>Usuario não encontrado</b></p>';
+        }?>
         <label for="senha">Senha:</label>
         <input type="password" id="senha" name="senha" required>
-
+        <?php if ($senhaIncorreta) {
+            echo '<p style="font-size: 18px; color: red"> <b>Senha incorreta</b></p>';
+        }?>
         <button type="submit" id="btnEntrar" name="login">Entrar</button>
     </form>
 </div>

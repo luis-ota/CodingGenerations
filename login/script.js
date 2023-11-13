@@ -18,7 +18,7 @@ function validarFormulario(usuario, senha) {
 }
 
 // Adiciona um ouvinte de evento ao formulário de login
-document.getElementById('agendamento-form').addEventListener('submit', function (event) {
+document.getElementById('login').addEventListener('submit', function (event) {
     // Obtém os valores dos campos de usuário e senha
     const usuarioInput = document.getElementById('usuario');
     const senhaInput = document.getElementById('senha');

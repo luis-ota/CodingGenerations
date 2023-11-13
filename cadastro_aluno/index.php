@@ -1,6 +1,7 @@
 <?php
 include('../banco/connection.php');
 
+$cpfJaCadastrado = false;
 
 if(isset($_POST['cadastro_aluno'])) {
     $nome = mysqli_real_escape_string($connection, $_POST['nome']);
@@ -24,8 +25,10 @@ if(isset($_POST['cadastro_aluno'])) {
 
     if ($resultCpfAluno) {
         // CPF do aluno já cadastrado, exibir mensagem ou tomar ação apropriada
-        echo '<p style="font-size: 25px; color: red;"><b>Aviso:</b> CPF do aluno já cadastrado.</p>';
+        $cpfJaCadastrado = true;
     } else {
+        $cpfJaCadastrado = false;
+
         // CPF do aluno não cadastrado, continuar o processamento
 
         // Obter a maior matrícula existente e incrementar
@@ -133,6 +136,10 @@ mysqli_close($connection);
                         <div>
                             <label for="cpf"> CPF </label>
                             <input type="text" name="cpf" id="cpf" value="">
+                            <?php
+                                if($cpfJaCadastrado){echo '<p style="font-size: 25px; color: red;"><b>Aviso:</b> CPF do aluno já cadastrado.</p>';
+                                }
+                            ?>
                             <span>ERRO</span>
                         </div>
                     </div>

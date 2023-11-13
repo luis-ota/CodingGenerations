@@ -12,11 +12,11 @@ body {
 
 .home {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     text-align: center;
     background-color: #6717c2;
-    padding: 0px 90px;
+    padding: 0 90px;
+    justify-content: space-evenly;
 }
 
 h1 {
@@ -60,7 +60,9 @@ img {
     text-decoration: none;
     color: rgb(255, 255, 255);
 }
-
+.menu a:hover {
+  color: #af80e5;
+}
 .menu-icon {
     display: block;
     cursor: pointer;
@@ -218,8 +220,8 @@ span {
 }
 
 .fotos img {
-  width: 100%; /* Garante que todas as imagens tenham a mesma largura */
-  height: auto; /* Mantém a proporção da imagem */
+  width: 100%; 
+  height: auto; 
 }
 .banco-de-dados{
   display: flex;
