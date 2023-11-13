@@ -138,5 +138,16 @@ function errorInput(input, message){
     formItem.className = "formInput error"
 }
 
+function maskCPF(input) {
+    let cpf = input.value
+
+    cpf=cpf.replace(/\D/g,"")
+    cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
+    cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
+    cpf=cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
+    input.value = cpf
+
+    input.setAttribute('maxlength', '14')
+}
 
 
