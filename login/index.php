@@ -1,13 +1,30 @@
 <?php
 include('../banco/connection.php');
+session_start();
 
+if(isset($_SESSION['user'])){
+    if($_SESSION['user']=='admin'){
+        header("location: ../logado/coordenador/");
+    }else{header("location: ../logado/index.php");
+    }
+}
+
+$senhaIncorreta = false;
+$usuarioInexistente = false;
 
 if(isset($_POST['login'])) {
     $usuario = mysqli_real_escape_string($connection, $_POST['usuario']);
     $senha = mysqli_real_escape_string($connection, $_POST['senha']);
-// Verifica se o usuário do aluno já está cadastrado
-    $usuarioSQL = "SELECT usuario, CPF FROM TBAluno WHERE usuario = '$usuario'";
-    $getUsuario = mysqli_query($connection, $usuarioSQL);
+
+
+    if ($usuario=='admin'){
+        $usuarioSQL = "SELECT usuario, CPF FROM Coordenador WHERE usuario = '$usuario'";
+        $getUsuario = mysqli_query($connection, $usuarioSQL);
+
+    }else{
+        $usuarioSQL = "SELECT usuario, CPF FROM TBAluno WHERE usuario = '$usuario'";
+        $getUsuario = mysqli_query($connection, $usuarioSQL);
+    }
 
     if (!$getUsuario) {
         echo '<p style="font-size: 18px; color: red;"> <b>Aviso: </b>usuario ou senha incorretos</p>';
@@ -17,7 +34,9 @@ if(isset($_POST['login'])) {
             $cpfAluno = $linha['CPF'];
             $usuarioAluno = $linha['usuario'];
             if ($senha == $cpfAluno and $usuario!=null) {
-                header("location: ../logado/index.html");
+                header("location: index.php");
+                $_SESSION['user'] = $usuarioAluno;
+
             }else{
                 $senhaIncorreta = true;
                 $usuarioInexistente = false;
@@ -76,7 +95,7 @@ mysqli_close($connection);
 
 <br>
 <footer>
-    <span class="rodape">©Todos os direitos reservados a Coding Generations</span>
+    <div class="rodape">©Todos os direitos reservados a Coding Generations</div>
 </footer>
 
 <script src="script.js"></script>

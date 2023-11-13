@@ -1,10 +1,12 @@
 <?php
 include('../../banco/connection.php');
 
-if(false){
-    echo 'eee';
-}else{
-    echo 'aaa';
+session_start();
+
+if(isset($_SESSION['user'])){
+    if($_SESSION['user']!='admin'){
+        header("location: ../index.php");
+    }
 }
 
 ?>
@@ -22,18 +24,13 @@ if(false){
 <body>
 <header>
     <div class="home">
-        <button class="hamburger-button">&#9776;Menu</button>
+        <button class="hamburger-button" style="visibility: hidden">&#9776;Menu</button>
         <div style="width: 30%">
             <img class= logo src="../../Imagens/Logo CG.png" alt="Logo da Coding Generations">
             <h1>Coding Generations</h1>
         </div>
         <div style="visibility: hidden">oi</div>
     </div>
-    <nav class="sidebar">
-        <ul>
-            <li><a href="../perfil/index.php">Perfil</a></li>
-        </ul>
-    </nav>
 </header>
 
 <h2> Seja bem vindo ao Painel de Coordenador</h2>
@@ -67,30 +64,20 @@ if(false){
               <td>
                 <div class="buttons">
                   <a href="updateForm.php?id=' .$row['Matricula']. '" class="edit">Editar</a>
-                  <a href="index.php?id=' .$row['Matricula']. '" class="delete">Delete</a>
+                  <a href="delete.php?id=' .$row['Matricula']. '" class="delete">Delete</a>
                 </div>
               </td>';
                 echo '<tr>';
             }
         }
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $del_query_TBaa = "DELETE FROM TBAluno_Avaliacao WHERE Matricula = '$id'";
-            $del_query_TBa = "DELETE FROM TBAluno WHERE Matricula = '$id'";
-            $result_delete = mysqli_query($connection, $del_query_TBaa);
-            $result_delete = mysqli_query($connection, $del_query_TBa);
-            header("location: ../");
-            exit();  // Certifique-se de sair após o redirecionamento
-        }
-
-
         ?>
     </table>
 </div>
 
+
+
 <footer>
-    <span class="rodape">©Todos os direitos reservados a Coding Generations</span>
+    <div class="rodape">©Todos os direitos reservados a Coding Generations</div>
 </footer>
-<script src="../script.js"></script>
 </body>
 </html>

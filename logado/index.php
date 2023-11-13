@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if(isset($_SESSION['user'])){
+    if($_SESSION['user']=='admin'){
+        header("location: ../logado/coordenador/");
+    }
+}else{header("location: ../login/");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,25 +42,25 @@
 
 <div class="card-container">
   <div class="card">
-    <a href="https://youtu.be/LqXqBgIUbJg">
+    <a href="https://www.youtube.com/watch?v=LqXqBgIUbJg">
       <img src="../Imagens/front.jpg" alt="Imagens de front-end">
       <p>Aulas de Font-End</p>
     </a>
   </div>
   <div class="card">
-    <a href="https://youtu.be/Qjk-cSW-jk4">
+    <a href="https://www.youtube.com/watch?v=Qjk-cSW-jk4">
       <img src="../Imagens/lingprog.jpg" alt="Imagens de back-end">
       <p>Aulas de Back-End</p>
     </a>
   </div>
   <div class="card">
-    <a href="https://youtu.be/E4F74yt9Now">
+    <a href="https://www.youtube.com/watch?v=E4F74yt9Now">
       <img src="../Imagens/mysql.png" alt="Imagem do mysql">
       <p>Aulas de Banco de Dados</p>
     </a>
   </div>
   <div class="card">
-    <a href="https://youtu.be/X-XfVvd41O8">
+    <a href="https://www.youtube.com/watch?v=X-XfVvd41O8">
       <img src="../Imagens/mobile.jpg" alt="Imagem de mobile">
       <p>Aulas de Desenvolvimento mobile</p>
     </a>

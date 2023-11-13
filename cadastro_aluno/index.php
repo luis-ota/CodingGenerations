@@ -18,47 +18,38 @@ if(isset($_POST['cadastro_aluno'])) {
 
 
 
-    // Verifica se o CPF do aluno já está cadastrado
     $cpfAlunoSQL = "SELECT Matricula FROM TBAluno WHERE CPF = '$CPF'";
     $getCpfAluno = mysqli_query($connection, $cpfAlunoSQL);
     $resultCpfAluno = mysqli_fetch_array($getCpfAluno);
 
     if ($resultCpfAluno) {
-        // CPF do aluno já cadastrado, exibir mensagem ou tomar ação apropriada
         $cpfJaCadastrado = true;
     } else {
         $cpfJaCadastrado = false;
 
-        // CPF do aluno não cadastrado, continuar o processamento
 
-        // Obter a maior matrícula existente e incrementar
         $matriculaSQL = "SELECT MAX(Matricula) FROM TBAluno";
         $getMatriculaSQL = mysqli_query($connection, $matriculaSQL);
         $resultMatriculaSQL = mysqli_fetch_array($getMatriculaSQL);
         $Matricula = $resultMatriculaSQL[0] + 1;
 
-        // Verifica se o CPF do responsável já está cadastrado
         $cpfRespSQL = "SELECT IDResponsavel FROM TBResponsavel WHERE CPF = '$cpfResp'";
         $getCpfResp = mysqli_query($connection, $cpfRespSQL);
         $resultCpfResp = mysqli_fetch_array($getCpfResp);
 
         if ($resultCpfResp) {
-            // CPF do responsável já cadastrado, obter o ID existente
             $IDResp = $resultCpfResp['IDResponsavel'];
         } else {
-            // CPF do responsável não cadastrado, obter o maior ID existente e incrementar
             $IDRespSQL = "SELECT MAX(IDResponsavel) FROM TBResponsavel";
             $getIDRespSQL = mysqli_query($connection, $IDRespSQL);
             $resultIDRespSQL = mysqli_fetch_array($getIDRespSQL);
             $IDResp = $resultIDRespSQL[0] + 1;
 
-            // Inserir novo responsável
             $sqlInsertResponsavel = "INSERT INTO TBResponsavel (IDResponsavel, Nome, CPF)
                                      VALUES ($IDResp, '$nomeResp', '$cpfResp');";
             $createResponsavel = mysqli_query($connection, $sqlInsertResponsavel);
         }
 
-        // Continuar com o restante do seu código para inserir o aluno
         $usuario = strstr(strtolower($nome . ' '), ' ', true) . $Matricula;
         $sqlInsertAluno = "INSERT INTO TBAluno (Matricula, Nome, data_nasc, CPF, IDResponsavel, IDTurma, usuario)
                            VALUES ($Matricula, '$nome', '$Data_nasc', '$CPF', $IDResp, $curso, '$usuario');";

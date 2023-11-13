@@ -1,7 +1,19 @@
 <?php
 include('../../banco/connection.php');
+
+
+session_start();
+
+if(isset($_SESSION['user'])){
+    if($_SESSION['user']=='admin'){
+        header("location: ../coordenador/");
+    }
+}else{
+    header("location: ../../login/");
+}
+
 $cpfJaCadastrado = false;
-$usuarioAluno = 'lorena33';
+$usuarioAluno = $_SESSION['user'];
 if (false) {
     echo '<p style="font-size: 18px; color: red;"> <b>Aviso: </b>usuario ou senha incorretos</p>';
 }else{
@@ -21,19 +33,15 @@ if(isset($_POST['editar-perfil'])) {
     $dataNascAlunoNovo = mysqli_real_escape_string($connection, $_POST['data']);
     $cpfAlunoNovo = preg_replace('/[^0-9]/', '', mysqli_real_escape_string($connection, $_POST['cpf']));
 
-    // Verifica se o CPF do aluno já está cadastrado (exceto para o aluno atual)
     $cpfAlunoSQL = "SELECT Matricula FROM TBAluno WHERE CPF = '$cpfAlunoNovo' AND Matricula != '$matriculaAlunoBanco'";
     $getCpfAluno = mysqli_query($connection, $cpfAlunoSQL);
 
     if (mysqli_num_rows($getCpfAluno) > 0) {
-        // CPF já cadastrado para outro aluno
         $cpfJaCadastrado = true;
     }else {
-        // CPF não cadastrado para outro aluno, pode prosseguir com a atualização
         $cpfJaCadastrado = false;
         $query = "UPDATE TBAluno SET Nome = '$nomeAlunoNovo', CPF = '$cpfAlunoNovo', data_nasc = '$dataNascAlunoNovo' WHERE usuario = '$usuarioAluno'";
 
-        // Executar a query
         if ($connection->query($query) === TRUE) {
             $usuarioAtualizado = true;
             header("location: index.php");
@@ -69,7 +77,7 @@ if(isset($_POST['editar-perfil'])) {
     <div class="home">
         <button class="hamburger-button">&#9776;Menu</button>
 
-            <a href="../index.html">
+            <a href="../index.php">
             <img class= logo src="../../Imagens/Logo CG.png" alt="Logo da Coding Generations">
             <h1>Coding Generations</h1></a>
         <div style="visibility: hidden">oi</div>

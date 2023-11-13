@@ -1,148 +1,202 @@
 <?php
 include('../../banco/connection.php');
-$cpfJaCadastrado = false;
-if (false) {
-    echo '<p style="font-size: 18px; color: red;"> <b>Aviso: </b>usuario ou senha incorretos</p>';
-}else{
-    $Matricula = $_GET['id'];
-    $usuarioSQL = "SELECT * FROM TBAluno WHERE Matricula = '$Matricula'";
-    $getUsuario = mysqli_query($connection, $usuarioSQL);
-    $linha = mysqli_fetch_assoc($getUsuario);
-    $nomeAlunoBanco = $linha['Nome'];
-    $dataNascAlunoBanco = $linha['data_nasc'];
-    $cpfAlunoBanco = $linha['CPF'];
-    //    Nome, data_nasc, CPF, usuario
-    $matriculaAlunoBanco = $linha['Matricula'];
 
-}
+// Função para validar CPF
+function validarCPF($cpf) {
+    $cpf = preg_replace('/[^0-9]/', '', $cpf);
 
-if(isset($_POST['editar-perfil'])) {
-    $nomeAlunoNovo = mysqli_real_escape_string($connection, $_POST['nome']);
-    $dataNascAlunoNovo = mysqli_real_escape_string($connection, $_POST['data']);
-    $cpfAlunoNovo = preg_replace('/[^0-9]/', '', mysqli_real_escape_string($connection, $_POST['cpf']));
-
-    // Verifica se o CPF do aluno já está cadastrado (exceto para o aluno atual)
-    $cpfAlunoSQL = "SELECT Matricula FROM TBAluno WHERE CPF = '$cpfAlunoNovo' AND Matricula != '$matriculaAlunoBanco'";
-    $getCpfAluno = mysqli_query($connection, $cpfAlunoSQL);
-
-    if (mysqli_num_rows($getCpfAluno) > 0) {
-        // CPF já cadastrado para outro aluno
-        $cpfJaCadastrado = true;
-    }else {
-        // CPF não cadastrado para outro aluno, pode prosseguir com a atualização
-        $cpfJaCadastrado = false;
-        $query = "UPDATE TBAluno SET Nome = '$nomeAlunoNovo', CPF = '$cpfAlunoNovo', data_nasc = '$dataNascAlunoNovo' WHERE Matricula = '$Matricula'";
-
-        // Executar a query
-        if ($connection->query($query) === TRUE) {
-            $usuarioAtualizado = true;
-            header("location: index.php");
-
-        } else {
-            echo "Erro na atualização: " . $connection->error;
-            $usuarioAtualizado = false;
-
-        }
+    if (strlen($cpf) !== 11) {
+        return false;
     }
 
+    if (preg_match('/^(\d)\1{10}$/', $cpf)) {
+        return false;
+    }
 
+    $soma = 0;
+    for ($i = 0; $i < 9; $i++) {
+        $soma += intval($cpf[$i]) * (10 - $i);
+    }
+    $digito1 = 11 - ($soma % 11);
+    if ($digito1 > 9) {
+        $digito1 = 0;
+    }
 
-}else{ $usuarioAtualizado = false;}
+    if (intval($cpf[9]) !== $digito1) {
+        return false;
+    }
+
+    $soma = 0;
+    for ($i = 0; $i < 10; $i++) {
+        $soma += intval($cpf[$i]) * (11 - $i);
+    }
+    $digito2 = 11 - ($soma % 11);
+    if ($digito2 > 9) {
+        $digito2 = 0;
+    }
+
+    if (intval($cpf[10]) !== $digito2) {
+        return false;
+    }
+
+    return true;
+}
+
+$Matricula = $_GET['id'];
+
+$cpfError = '';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = mysqli_real_escape_string($connection, $_POST['name']);
+    $cpf = preg_replace('/[^0-9]/', '', mysqli_real_escape_string($connection, $_POST['cpf']));
+    $data = mysqli_real_escape_string($connection, $_POST['data']);
+
+    if (empty($name) || empty($cpf) || empty($data)) {
+        echo '<script type="text/javascript">
+                alert("Por favor, preencha todos os campos.");
+              </script>';
+    } else {
+        if (!validarCPF($cpf)) {
+            $cpfError = '<p style="color: red;">CPF inválido. Por favor, insira um CPF válido.</p>';
+        } else {
+            $cpfError = '';
+
+            $sql = "UPDATE TBAluno SET Nome = '$name', cpf = '$cpf', data_nasc = '$data' WHERE Matricula='$Matricula'";
+
+            if (mysqli_query($connection, $sql) or die($connection->error)) {
+                mysqli_close($connection);
+                header('Location: index.php');
+            } else {
+                echo '<script type="text/javascript">
+                        alert("Error: ' . $sql . ". " . $connection->error . '");
+                      </script>';
+            }
+        }
+    }
+}
+
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../perfil/perfil.css">
-    <script type="module" src="../perfil/script.js"></script>
+    <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" type="image/png" href="../../Imagens/Logo CG.png">
     <title>Coding Generations</title>
 </head>
 <body>
 <header>
     <div class="home">
-        <button class="hamburger-button">&#9776;Menu</button>
-
-        <a href="../index.html">
+        <button class="hamburger-button" style="visibility: hidden">&#9776;Menu</button>
+        <div style="width: 30%">
             <img class= logo src="../../Imagens/Logo CG.png" alt="Logo da Coding Generations">
-            <h1>Coding Generations</h1></a>
+            <h1>Coding Generations</h1>
+        </div>
         <div style="visibility: hidden">oi</div>
     </div>
-
-
-    <div class="sidebar">
-        <ul>
-            <li><a href="../index3-1.html">Faltas</a></li>
-            <li><a href="../index3-1.html">Notas</a></li>
-            <li><a href="../index3-1.html">Avisos</a></li>
-            <li><a href="../index3-1.html">Metas</a></li>
-            <li><a href="../perfil/index.php"><u>Perfil</u></a></li>
-        </ul>
-    </div>
 </header>
-
-<h2>Atualizar dados do Aluno</h2>
-<div class="editarr">
-
-    <div id="formulario">
-        <form id="editar" action="index.php" method="post" name="editar-perfil">
-            <?php
-            echo "
-                <div class='formInput'>
-                    <label for='nome'> Nome </label>
-                    <input type='text' name='nome' id='nome' value='$nomeAlunoBanco'>
-                    <span>ERRO</span>
-                </div>
-                
-                
-                <div>
-                    <label for='cpf'> CPF </label>
-                    <input type='text' name='cpf' id='cpf' value='$cpfAlunoBanco'>
-                    "?>
-            <?php
-            if($cpfJaCadastrado){echo '<p style="font-size: 20px; color: red;"><b>Aviso:</b> CPF do aluno já cadastrado.</p>';}
-            echo "    
-                    <span>ERRO</span>
-                </div>
-
-                <div class='formInput'>
-                    <label for='data'> Data de Nascimento </label>
-                    <input type='date' name='data' id='data' value='$dataNascAlunoBanco'>
-                    <span>ERRO</span>
-                </div>
-                    "
-            ?>
-
-            <div id="submmitContainer" class="btn">
-                <button type="submit" id="btn" name="editar-perfil">
-                    Atualizar dados
-                </button>
+<div class="container">
+    <div class="box">
+        <h1>Alteração de Cadastro</h1>
+        <form method="post">
+            <!-- input de login -->
+            <div class="user-info">
+                <label>Nome:</label>
+                <?php
+                $sql = "SELECT Nome FROM TBAluno WHERE Matricula='$Matricula'";
+                $result = mysqli_query($connection, $sql);
+                $data = mysqli_fetch_assoc($result);
+                if ($connection->query($sql)) {
+                    echo '<input type="text" name="name" value="' . $data['Nome'] . '" required>';
+                }
+                ?>
             </div>
+
+            <div class="cpf-info">
+                <label>CPF:</label>
+                <?php
+                $sql = "SELECT CPF FROM TBAluno WHERE Matricula='$Matricula'";
+                $result = mysqli_query($connection, $sql);
+                $data = mysqli_fetch_assoc($result);
+                if ($connection->query($sql)) {
+                    echo '<input id="cpfInput" type="text" name="cpf" value="' . $data['CPF'] . '" required oninput="maskCPF(this); validarCPF(this.value);">' . $cpfError;
+                }
+                ?>
+            </div>
+
+            <div class="data-info">
+                <label>Data de Nascimento:</label>
+                <?php
+                $sql = "SELECT data_nasc FROM TBAluno WHERE Matricula='$Matricula'";
+                $result = mysqli_query($connection, $sql);
+                $data = mysqli_fetch_assoc($result);
+                if ($connection->query($sql)) {
+                    echo '<input type="date" name="data" value="' . $data['data_nasc'] . '" required>';
+                }
+                ?>
+            </div>
+
+            <input type="submit" class="edit-button" name="edit" value="Concluir">
         </form>
     </div>
-
 </div>
 
-<footer>
-    <div class="rodape">©Todos os direitos reservados a Coding Generations</div>
-</footer>
-
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const hamburgerButton = document.querySelector('.hamburger-button');
-        const sidebar = document.querySelector('.sidebar');
+    function maskCPF(input) {
+        let cpf = input.value;
+        cpf = cpf.replace(/\D/g, "");
+        cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+        cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+        cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+        input.value = cpf;
+        input.setAttribute('maxlength', '14');
+    }
 
-        hamburgerButton.addEventListener('click', function() {
-            if(sidebar.style.visibility === 'visible'){
-                sidebar.classList.toggle('show-sidebar');
-                sidebar.style.visibility = 'hidden';}else{sidebar.style.visibility = 'visible'}
-        });
-    });
+    function validarCPF(cpf) {
+        cpf = cpf.replace(/[^\d]/g, '');
+
+        if (cpf.length !== 11) {
+            return false;
+        }
+
+        if (/^(\d)\1{10}$/.test(cpf)) {
+            return false;
+        }
+
+        let soma = 0;
+        for (let i = 0; i < 9; i++) {
+            soma += parseInt(cpf.charAt(i)) * (10 - i);
+        }
+        let digito1 = 11 - (soma % 11);
+        if (digito1 > 9) {
+            digito1 = 0;
+        }
+
+        if (parseInt(cpf.charAt(9)) !== digito1) {
+            return false;
+        }
+
+        soma = 0;
+        for (let i = 0; i < 10; i++) {
+            soma += parseInt(cpf.charAt(i)) * (11 - i);
+        }
+        let digito2 = 11 - (soma % 11);
+        if (digito2 > 9) {
+            digito2 = 0;
+        }
+
+        if (parseInt(cpf.charAt(10)) !== digito2) {
+            return false;
+        }
+
+        return true;
+    }
 </script>
+
+<footer style="bottom: 0">
+    <div class="rodape">©Todos os direitor reservados a Coding Generations</div>
+</footer>
 </body>
 </html>
