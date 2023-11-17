@@ -114,6 +114,13 @@ create table TBAluno_Avaliacao(
     foreign key (IDAvaliacao) references TBAvaliacao(IDAvaliacao)
 );
 
+
+Create Table Coordenador(
+	IDC int primary key,
+    usuario varchar(10),
+    CPF varchar(11)
+);
+
 -- Populando O DB projetoCG
 use projetoCG;
 
@@ -301,10 +308,9 @@ INSERT INTO TBResponsavel (IDResponsavel, Nome, CPF) VALUES
 (29, 'Natalia Costa', '21098765432'),
 (30, 'Vinícius Lima', '10987654321');
 
-
-
 -- Inserções para a tabela TBAluno
 INSERT INTO TBAluno (Matricula, Nome, data_nasc, CPF, IDResponsavel, IDTurma) VALUES
+(1, 'João Silva Jr.', '2000-01-15', '11122233344', 1, 1),
 (2, 'Maria Oliveira Jr.', '2001-02-20', '22233344455', 2, 2),
 (3, 'Carlos Santos Jr.', '2002-03-25', '33344455566', 3, 3),
 (4, 'Ana Pereira Jr.', '2003-04-30', '44455566677', 4, 4),
@@ -528,13 +534,9 @@ WHERE a.Matricula NOT IN (SELECT Matricula FROM TBAluno_Avaliacao);
 
 
 
------------------------------------------------------------------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------------------------------------------------------
 
-Create Table Coordenador(
-	IDC int primary key,
-    usuario varchar(10),
-    CPF varchar(11)
-);
+
 
 insert into Coordenador values(1, 'admin', 'admin123');
 
