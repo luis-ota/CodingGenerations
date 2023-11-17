@@ -18,6 +18,6 @@ if (isset($_GET['id'])) {
     $result_delete = mysqli_query($connection, $del_query_TBaa);
     $result_delete = mysqli_query($connection, $del_query_TBa);
     header("location: ./index.php");
-    exit();  // Certifique-se de sair após o redirecionamento
+    exit();  
 }
 ?>
