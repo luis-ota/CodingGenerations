@@ -80,7 +80,9 @@ if(isset($_POST['editar-perfil'])) {
             <a href="../index.php">
             <img class= logo src="../../Imagens/Logo CG.png" alt="Logo da Coding Generations">
             <h1>Coding Generations</h1></a>
-        <div style="visibility: hidden">oi</div>
+            <a href="./../sair.php">
+            <button>Sair</button>
+          </a>
     </div>
 
 
