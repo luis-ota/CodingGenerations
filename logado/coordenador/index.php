@@ -29,7 +29,9 @@ if(isset($_SESSION['user'])){
             <img class= logo src="../../Imagens/Logo CG.png" alt="Logo da Coding Generations">
             <h1>Coding Generations</h1>
         </div>
-        <div style="visibility: hidden">oi</div>
+        <a style='background-color: #008cba00;' href="../sair.php">
+            <button>Sair</button>
+          </a>
     </div>
 </header>
 
